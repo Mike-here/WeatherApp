@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Results</title>
+</head>
+
+<body>
+
+  <h1>Optimal Times for {{ location }}</h1>
+  <ul>
+    {% for time in optimal_times %}
+    <li>
+      {{ time.datetime }} - Temp: {{ time.temp }}°C, Humidity: {{ time.humidity }}%, Condition: {{ time.condition }}
+      <ul>
+        {% for activity in time.suitable_activities %}
+        <li>Suitable Activity: {{activity}}</li>
+        {% empty %}
+        <li>No suitable activities found based on your preferences.</li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% empty %}
+    <li>No optimal times found based on your preferences.</li>
+    {% endfor %}
+  </ul>
+  <h1>News Feed for {{ location }}</h1>
+  <ul>
+    {% for article in top_headlines %}
+    <li>
+      <h2>{{ article.title }}</h2>
+      <p>{{ article.description }}</p>
+    </li>
+    {% empty %}
+    <li>No news articles found.</li>
+    {% endfor %}
+  </ul>
+  <a href="/">Go Back</a>
+</body>
